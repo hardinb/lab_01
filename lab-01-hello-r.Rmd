@@ -16,7 +16,11 @@ library(datasauRus)
 
 ### Exercise 1
 
-Remove this text, and add your answer for Exercise 1 here.
+The datasaurus_dozen dataframe has 1846 rows and 3 columns, or variables.
+These variables are:
+1. dataset - which dataset the data are from
+2. x - x-values
+3. y - y-values
 
 ### Exercise 2
 
