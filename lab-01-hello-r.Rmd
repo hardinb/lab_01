@@ -24,12 +24,18 @@ These variables are:
 
 ### Exercise 2
 
-The answers for this exercise are given for you below.
-But you should clean up some of the narrative so that it only includes what you want to turn in.
+The purpose of this exercise is to visualize and describe the relationship between
+variables x & y in the dino dataset.
 
-First let's plot the data in the dino dataset:
+The first part of code below filters out all the datasets in the datasaurus_dozen
+data frame besides the dino dataset, so that we can plot that dataset specifically.
 
-```{r plot-dino, fig.height=3, fig.width=6}
+The second part of the code creates a scatterplot of values x & y using the ggplot
+function. The arguments (1) select the filtered dataset we just made, (2) assigns the x
+variable to the x axis and the y variable to the y axis, (3) chooses points as our
+shape for representing each datapoint. The result is a beautiful dinosaur!
+
+```{r plot-dino, fig.height=3, fig.width=4}
 dino_data <- datasaurus_dozen %>%
   filter(dataset == "dino")
 
@@ -37,7 +43,9 @@ ggplot(data = dino_data, mapping = aes(x = x, y = y)) +
   geom_point()
 ```
 
-And next calculate the correlation between `x` and `y` in this dataset:
+Finally, the code below calculates the correlation between x and y in the dino dataset
+and makes a table showing the correlation coefficient (r = -.065). This correlation
+sadly is misleading and does not capture the majesty of the dinosaur.
 
 ```{r cor-dino}
 dino_data %>%
