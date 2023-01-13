@@ -54,20 +54,31 @@ dino_data %>%
 
 ### Exercise 3
 
-Add code and narrative as needed.
-Note that the R chunks are labeled with `plot-star` and `cor-star` to provide spaces to place the code for plotting and calculating the correlation coefficient.
-To finish, clean up the narrative by removing these instructions.
+The purpose of this exercise is to visualize and describe the star dataset.
+
+The code chunk below replicates the code we used above for the dino dataset, except
+this time we are filtering for the star dataset instead. As we might expect from
+the name, this scatterplot of x & y in this dataset looks like a star.
 
 
+```{r plot-star, fig.height = 3, fig.width = 4}
+star_data <- datasaurus_dozen %>%
+  filter(dataset == "star")
 
-```{r plot-star}
-
+ggplot(data = star_data, mapping = aes(x = x, y = y)) +
+  geom_point()
 ```
 
-I'm some filler text, you should replace me with more meaningful text...
+Now, we can see how x & y are correlated in this dataset. Again, all we have to do 
+is re-use our code from above, but now using the star dataset we made earlier.
+
+The correlation between x & y is exactly the same as in the dino dataset (r = -.065)
+even though the shape of the relationship between x & y in these two datasets is 
+completely different! (because a dinosaur is a different shape than a star)
 
 ```{r cor-star}
-
+dino_data %>%
+  summarize(r = cor(x, y))
 ```
 
 ### Exercise 4
