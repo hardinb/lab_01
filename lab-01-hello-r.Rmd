@@ -111,8 +111,7 @@ Finally, we can calculate the correlation between x & y separately for each data
 ```{r cor-all}
 datasaurus_dozen %>%
   group_by(dataset) %>%
-  summarize(r = cor(x, y)) %>%
-  print(13)
+  summarize(r = cor(x, y))
 ```
 
 ## Bonus Tips by Yoo Ri
