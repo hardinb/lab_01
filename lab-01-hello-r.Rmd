@@ -18,22 +18,20 @@ library(datasauRus)
 
 The datasaurus_dozen dataframe has 1846 rows and 3 columns, or variables.
 These variables are:
+
 1. dataset - which dataset the data are from
+
 2. x - x-values
+
 3. y - y-values
 
 ### Exercise 2
 
-The purpose of this exercise is to visualize and describe the relationship between
-variables x & y in the dino dataset.
+The purpose of this exercise is to visualize and describe the relationship between variables x & y in the dino dataset.
 
-The first part of code below filters out all the datasets in the datasaurus_dozen
-data frame besides the dino dataset, so that we can plot that dataset specifically.
+The first part of code below filters out all the datasets in the datasaurus_dozen data frame besides the dino dataset, so that we can plot that dataset specifically.
 
-The second part of the code creates a scatterplot of values x & y using the ggplot
-function. The arguments (1) select the filtered dataset we just made, (2) assigns the x
-variable to the x axis and the y variable to the y axis, (3) chooses points as our
-shape for representing each datapoint. The result is a beautiful dinosaur!
+The second part of the code creates a scatterplot of values x & y using the ggplot function. The arguments (1) select the filtered dataset we just made, (2) assigns the x variable to the x axis and the y variable to the y axis, (3) chooses points as our shape for representing each datapoint. The result is a beautiful dinosaur!
 
 ```{r plot-dino, fig.height=3, fig.width=4}
 dino_data <- datasaurus_dozen %>%
@@ -43,9 +41,7 @@ ggplot(data = dino_data, mapping = aes(x = x, y = y)) +
   geom_point()
 ```
 
-Finally, the code below calculates the correlation between x and y in the dino dataset
-and makes a table showing the correlation coefficient (r = -.065). This correlation
-sadly is misleading and does not capture the majesty of the dinosaur.
+Finally, the code below calculates the correlation between x and y in the dino dataset and makes a table showing the correlation coefficient (r = -.065). This correlation sadly is misleading and does not capture the majesty of the dinosaur.
 
 ```{r cor-dino}
 dino_data %>%
@@ -56,9 +52,7 @@ dino_data %>%
 
 The purpose of this exercise is to visualize and describe the star dataset.
 
-The code chunk below replicates the code we used above for the dino dataset, except
-this time we are filtering for the star dataset instead. As we might expect from
-the name, this scatterplot of x & y in this dataset looks like a star.
+The code chunk below replicates the code we used above for the dino dataset, except this time we are filtering for the star dataset instead. As we might expect from the name, the scatterplot of x & y for this dataset looks like a star.
 
 
 ```{r plot-star, fig.height = 3, fig.width = 4}
@@ -69,30 +63,33 @@ ggplot(data = star_data, mapping = aes(x = x, y = y)) +
   geom_point()
 ```
 
-Now, we can see how x & y are correlated in this dataset. Again, all we have to do 
-is re-use our code from above, but now using the star dataset we made earlier.
+Now, we can see how x & y are correlated in this dataset. Again, all we have to do is re-use our code from above, but now using the star dataset we made earlier.
 
-The correlation between x & y is exactly the same as in the dino dataset (r = -.065)
-even though the shape of the relationship between x & y in these two datasets is 
-completely different! (because a dinosaur is a different shape than a star)
+The correlation between x & y is almost exactly the same as in the dino dataset, but very slightly smaller (r = -.063).
 
 ```{r cor-star}
-dino_data %>%
+star_data %>%
   summarize(r = cor(x, y))
 ```
 
 ### Exercise 4
 
-Add code and narrative as needed.
-Note that two R chunks are given but they are not labeled.
-Use the convention from above to name them appropriately.
+The purpose of this exercise is to visualize and describe the circle dataset.
 
-```{r}
+Just like before, we can re-use the same code except filtering for the circle dataset this time. When we plot x & y, we get a circle shaped scatterplot!
 
+```{r plot_circle, fig.height = 3, fig.width = 3}
+circle_data <- datasaurus_dozen %>%
+  filter(dataset == "circle")
+
+ggplot(data = circle_data, mapping = aes(x = x, y = y)) +
+  geom_point()
 ```
+The correlation between x & y in the circle dataset is extremely close to what we saw in the dino and star datasets, but very slightly larger (r = -.068)
 
-```{r}
-
+```{r cor-circle}
+circle_data %>%
+  summarize(r = cor(x, y))
 ```
 
 ### Exercise 5
