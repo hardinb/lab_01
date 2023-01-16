@@ -2,7 +2,9 @@
 title: "Lab 01 - Hello R"
 author: "Ben Hardin"
 date: "1/13/2023"
-output: github_document
+output: 
+  html_document: 
+    highlight: tango
 ---
 
 ## Load packages and data
@@ -16,14 +18,13 @@ library(datasauRus)
 
 ### Exercise 1
 
-The datasaurus_dozen dataframe has 1846 rows and 3 columns, or variables.
-These variables are:
+The datasaurus_dozen dataframe has 1846 rows and 3 columns, or variables. These variables are:
 
-1. dataset - which dataset the data are from
+1.  dataset - which dataset the data are from
 
-2. x - x-values
+2.  x - x-values
 
-3. y - y-values
+3.  y - y-values
 
 ### Exercise 2
 
@@ -54,8 +55,7 @@ The purpose of this exercise is to visualize and describe the star dataset.
 
 The code chunk below replicates the code we used above for the dino dataset, except this time we are filtering for the star dataset instead. As we might expect from the name, the scatterplot of x & y for this dataset looks like a star.
 
-
-```{r plot-star, fig.height = 3, fig.width = 4}
+```{r plot-star, fig.height = 3, fig.width = 3.5}
 star_data <- datasaurus_dozen %>%
   filter(dataset == "star")
 
@@ -85,6 +85,7 @@ circle_data <- datasaurus_dozen %>%
 ggplot(data = circle_data, mapping = aes(x = x, y = y)) +
   geom_point()
 ```
+
 The correlation between x & y in the circle dataset is extremely close to what we saw in the dino and star datasets, but very slightly larger (r = -.068)
 
 ```{r cor-circle}
@@ -94,22 +95,38 @@ circle_data %>%
 
 ### Exercise 5
 
-Add code and narrative as needed.
+The purpose of exercise 5 is to visualize and describe all the datasets in the datasaurus dozen.
 
-To add R chunks either type out the backticks, curly braces, and the letter `r` or use the Insert chunk button above, green C+.
+The code chunk below allows us to generate scatterplots for each of the different datasets all at once, by "faceting" the full dataframe by the dataset variable. The result is a grid where each cell is a scatterplot of one of the facets, or datasets. Now we can see the shape of the relationship between x & y in each of these different datasets in one figure.
 
+```{r plot_all, fig.height = 8, fig.width = 6}
+ggplot(datasaurus_dozen, aes(x = x, y = y, color=dataset))+
+  geom_point()+
+  facet_wrap(~ dataset, ncol = 3)+
+  theme(legend.position = "none")
+```
 
+Finally, we can calculate the correlation between x & y separately for each dataset all at once, by grouping our data by the dataset variable. Results show that, although the shape of relationship between x & y is very different between these datasets, they all show virtually the same correlation (rs = -.06 to -.069).
+
+```{r cor-all}
+datasaurus_dozen %>%
+  group_by(dataset) %>%
+  summarize(r = cor(x, y)) %>%
+  print(13)
+```
 
 ## Bonus Tips by Yoo Ri
 
-Here are some helpful tips :) 
+Here are some helpful tips :)
 
-* filter() is for extracting rows
+-   filter() is for extracting rows
 
-* group_by() is for grouping datasets by assigned column 
-* ungroup() cancels the grouping 
+-   group_by() is for grouping datasets by assigned column
 
-* summarize()  is often used with group_by(). This function can print the output according to the group_by().
+-   ungroup() cancels the grouping
 
-* facet_grid(y~x,...) creates a grid with variable y as a row, variable x as a column  
-* facet_wrap(x,... ) is useful when there is only one variable
+-   summarize() is often used with group_by(). This function can print the output according to the group_by().
+
+-   facet_grid(y\~x,...) creates a grid with variable y as a row, variable x as a column\
+
+-   facet_wrap(x,... ) is useful when there is only one variable
